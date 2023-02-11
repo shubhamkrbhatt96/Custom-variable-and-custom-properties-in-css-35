@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom variable and custom properties in css 35</title>
+    <style>
+        /* To make the global variable we need to introduce the root element which is applicable everywhere throughout the box as well as container. */
+        /* the elements present in the root will reflect everywhere the custom properties,irrespective of the scope present anywhere. */
+        :root {
+            /* --box-color: green; */
+            /* normally we divide the root element into primary color and secondary/danger color for reference further in code. */
+            --primary-color: blue;
+            --danger-color: white;
+            --box-color: magenta;
+            --maxw: 333px;
+        }
+
+        /* Scope of the variable is within that box */
+        .box {
+            /*I want to create the background of the box here using this varibale --box-color */
+            /* Creation of the variable for the box  */
+
+            --box-color: maroon;
+            width: 200px;
+            height: 200px;
+            font-size: 22px;
+
+            /* make sure to give the name of the variable in background colour in var format only. */
+            background-color: var(--primary-color);
+            border: 2px solid var(--danger-color);
+            margin: 2px 9px;
+            box-shadow: 3px 3px var(--box-color);
+            /* now if i make changes in --box-color directly the impact comes throught the css box effectively,that's the usecase of variable declaration in css */
+        }
+
+        .container {
+            background-color: var(--box-color);
+            /* margin:auto will bring the content of container in the middle. */
+            /* if i have made less width , then i have to bring the boxes in center by using margin:auto property in that case */
+            margin: auto;
+            /* you have to define again this property hee of --box-color here to make the changes reflect in container also */
+            /* --box-color: maroon; */
+            /* you will not see the changes here because the scope of the variable is limited to box only here */
+
+            justify-content: center;
+            align-items: center;
+            /* background-color: var(--box-color); */
+            display: flex;
+            /* we are calling this variable which is present in root element and getting the values displayed on screen. */
+            max-width: var(--maxw);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">Box1</div>
+        <div class="box">Box2</div>
+        <div class="box">Box3</div>
+    </div>
+</body>
+
+</html>
